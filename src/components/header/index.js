@@ -7,17 +7,9 @@ const Header = () => (
   <header class={'navbar is-transparent is-fixed-top' + style.header}>
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
-        <img
-          src={logo}
-          alt="Lockdown, information about current lockdown state of different countries"
-          width="112"
-          height="28"
-        />
+        <img src={logo} alt="Lockdown, information about current lockdown state of different countries" width="112" height="28" />
       </a>
-      <div
-        class="navbar-burger burger"
-        data-target="navbarExampleTransparentExample"
-      >
+      <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
         <span></span>
         <span></span>
         <span></span>
@@ -67,10 +59,7 @@ const Header = () => (
               </a>
             </p>
             <p class="control">
-              <a
-                class="button is-primary"
-                href="https://github.com/Code-for-All/lockdown/raw/master/data/datafile.json"
-              >
+              <a class="button is-primary" href="https://github.com/Code-for-All/lockdown/raw/master/data/datafile.json">
                 <span class="icon">
                   <i class="fas fa-download"></i>
                 </span>

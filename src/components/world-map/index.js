@@ -1,10 +1,10 @@
 import { h, Component } from 'preact';
 import { Map, Browser, geoJSON, layerGroup, tileLayer } from 'leaflet';
+import Slider from '../slider';
 import mapData from '../../../data/worldmap.json';
 import themeData from '../../../data/datafile.json';
 
-const mapbox_token =
-  'pk.eyJ1IjoibWlibG9uIiwiYSI6ImNrMGtvajhwaDBsdHQzbm16cGtkcHZlaXUifQ.dJTOE8FJc801TAT0yUhn3g';
+const mapbox_token = 'pk.eyJ1IjoibWlibG9uIiwiYSI6ImNrMGtvajhwaDBsdHQzbm16cGtkcHZlaXUifQ.dJTOE8FJc801TAT0yUhn3g';
 
 class WorldMap extends Component {
   componentDidMount() {
@@ -17,29 +17,24 @@ class WorldMap extends Component {
     });
     let themeLayer;
     let labelLayer = layerGroup();
-
     function zoomToFeature(e) {
       const layer = e.target;
       map.fitBounds(layer.getBounds());
     }
-
     function resetHighlight(e) {
       const layer = e.target;
       themeLayer.resetStyle(layer);
     }
-
     function highlightFeature(e) {
       const layer = e.target;
       layer.setStyle({
         fillOpacity: 0.5,
         name: 'test'
       });
-
       if (!Browser.ie && !Browser.opera && !Browser.edge) {
         layer.bringToFront();
       }
     }
-
     function onEachFeature(feature, layer) {
       layer.on({
         mouseover: highlightFeature,
@@ -47,18 +42,12 @@ class WorldMap extends Component {
         click: zoomToFeature
       });
     }
-
-    tileLayer(
-      'https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token=' +
-        mapbox_token,
-      {
-        tileSize: 512,
-        zoomOffset: -1,
-        attribution:
-          '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      }
-    ).addTo(map);
-
+    tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token=' + mapbox_token, {
+      tileSize: 512,
+      zoomOffset: -1,
+      attribution:
+        '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
     function worldStyle(e) {
       let value;
       if (e.properties.data && e.properties.data.lockdowns) {
@@ -84,19 +73,16 @@ class WorldMap extends Component {
       }
       return style;
     }
-
     for (const feature of mapData.features) {
       if (themeData[feature.properties.NAME]) {
         feature.properties.data = themeData[feature.properties.NAME];
       }
     }
-
     themeLayer = geoJSON(mapData, {
       style: worldStyle,
       onEachFeature: onEachFeature
     }).addTo(map);
     labelLayer.addTo(map);
-
     this.setState({
       map
     });
@@ -108,12 +94,16 @@ class WorldMap extends Component {
 
   render() {
     return (
-      <div
-        style="height: 100%"
-        ref={ref => {
-          this.ref = ref;
-        }}
-      ></div>
+      <>
+        <div
+          style="height: 100%"
+          ref={ref => {
+            this.ref = ref;
+          }}
+        ></div>
+
+        <Slider />
+      </>
     );
   }
 }
