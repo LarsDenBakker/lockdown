@@ -2,6 +2,8 @@ import { h } from 'preact';
 import { Link } from 'preact-router/match';
 import logo from '../../assets/images/lockdown.png';
 import style from './style';
+import twitterIcon from '../../assets/icons/twitter.svg';
+import downloadIcon from '../../assets/icons/download.svg';
 
 const Header = () => (
   <header class={'navbar is-transparent is-fixed-top' + style.header}>
@@ -53,7 +55,7 @@ const Header = () => (
                 href="https://twitter.com/intent/tweet?text=Look at the lockdown state of countries across the world&amp;url=https://code-for-all.github.io/lockdown&amp;via=codeforall"
               >
                 <span class="icon">
-                  <i class="fab fa-twitter"></i>
+                  <img class={style.icon} src={twitterIcon} />
                 </span>
                 <span>Tweet</span>
               </a>
@@ -61,7 +63,7 @@ const Header = () => (
             <p class="control">
               <a class="button is-primary" href="https://github.com/Code-for-All/lockdown/raw/master/data/datafile.json">
                 <span class="icon">
-                  <i class="fas fa-download"></i>
+                  <img class={style.icon} src={downloadIcon} />
                 </span>
                 <span>Download</span>
               </a>

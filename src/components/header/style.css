@@ -2,3 +2,7 @@
   /* needs to be higher than the map */
   z-index: 1008;
 }
+
+.icon {
+  width: 1em;
+}
